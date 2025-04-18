@@ -9,7 +9,11 @@ import {
   Paper,
   TextField,
   Button,
-  Divider,
+  Link,
+  Alert,
+  Snackbar,
+  CircularProgress,
+  InputAdornment,
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import { theme, styles } from '../../theme';
@@ -17,19 +21,61 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import BusinessIcon from '@mui/icons-material/Business';
+import PersonIcon from '@mui/icons-material/Person';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    name: '',
+    firstname: '',
+    lastname: '',
+    company_name: '',
     email: '',
     phone: '',
     message: '',
   });
 
-  const handleSubmit = (e) => {
+  const [loading, setLoading] = useState(false);
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: '',
+    severity: 'success'
+  });
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log(formData);
+    setLoading(true);
+
+    try {
+      // Here you can implement your own form submission logic
+      // For now, we'll just simulate a successful submission
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      setFormData({
+        firstname: '',
+        lastname: '',
+        company_name: '',
+        email: '',
+        phone: '',
+        message: '',
+      });
+
+      setSnackbar({
+        open: true,
+        message: 'Votre message a été envoyé avec succès !',
+        severity: 'success'
+      });
+
+    } catch (error) {
+      console.error('Error:', error);
+      setSnackbar({
+        open: true,
+        message: 'Une erreur est survenue lors de l\'envoi du message',
+        severity: 'error'
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -37,6 +83,34 @@ export default function Contact() {
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbar({ ...snackbar, open: false });
+  };
+
+  const textFieldStyles = {
+    '& .MuiOutlinedInput-root': {
+      '& fieldset': {
+        borderColor: 'rgba(206, 176, 78, 0.2)',
+        transition: 'border-color 0.3s ease'
+      },
+      '&:hover fieldset': {
+        borderColor: '#ceb04e'
+      },
+      '&.Mui-focused fieldset': {
+        borderColor: '#ceb04e'
+      }
+    },
+    '& .MuiInputLabel-root': {
+      color: '#666',
+      '&.Mui-focused': {
+        color: '#ceb04e'
+      }
+    },
+    '& .MuiInputAdornment-root .MuiSvgIcon-root': {
+      color: '#ceb04e'
+    }
   };
 
   return (
@@ -109,12 +183,145 @@ export default function Contact() {
         </Container>
       </Box>
 
-      <Container maxWidth="lg" sx={{ mb: 8 }}>
-        <Grid container spacing={4}>
-          <Grid item xs={12} md={6}>
+      <Container maxWidth="lg">
+        {/* Premier rendez-vous section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <Box
+            sx={{
+              background: 'linear-gradient(135deg, rgba(206, 176, 78, 0.1) 0%, rgba(230, 200, 110, 0.1) 100%)',
+              borderRadius: 2,
+              border: '1px solid rgba(206, 176, 78, 0.2)',
+              p: { xs: 3, md: 4 },
+              mb: 6,
+              textAlign: 'center',
+              position: 'relative',
+              overflow: 'hidden',
+              maxWidth: '800px',
+              mx: 'auto',
+              '&:before': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: 'radial-gradient(circle at 50% 50%, rgba(206, 176, 78, 0.1) 0%, rgba(206, 176, 78, 0) 70%)',
+                zIndex: 1
+              }
+            }}
+          >
+            <Typography 
+              variant="h4"
+              sx={{ 
+                fontFamily: "'Bitter', serif",
+                fontSize: { xs: '1.5rem', md: '2rem' },
+                fontWeight: 600,
+                color: '#ceb04e',
+                mb: 2,
+                position: 'relative',
+                zIndex: 2
+              }}
+            >
+              Premier rendez-vous gratuit et sans engagement
+            </Typography>
+            <Typography 
+              sx={{ 
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: { xs: '1.1rem', md: '1.2rem' },
+                lineHeight: 1.8,
+                color: '#555',
+                fontStyle: 'italic',
+                position: 'relative',
+                zIndex: 2,
+                maxWidth: '600px',
+                mx: 'auto'
+              }}
+            >
+              "Mon engagement est d'offrir un service et un accompagnement exceptionnels à tous mes clients. Votre satisfaction est ma priorité."
+            </Typography>
+            <Typography 
+              sx={{ 
+                fontFamily: "'Bitter', serif",
+                fontWeight: 600,
+                mt: 2,
+                color: '#ceb04e',
+                position: 'relative',
+                zIndex: 2
+              }}
+            >
+              Aurore MILLOT — Aurea
+            </Typography>
+          </Box>
+        </motion.div>
+
+        {/* Service Area section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <Box
+            sx={{
+              textAlign: 'center',
+              mb: 6,
+              position: 'relative',
+              '&:before': {
+                content: '""',
+                position: 'absolute',
+                left: '50%',
+                top: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: { xs: '100%', md: '500px' },
+                height: '1px',
+                background: 'linear-gradient(90deg, rgba(206, 176, 78, 0) 0%, rgba(206, 176, 78, 0.5) 25%, rgba(206, 176, 78, 0.5) 75%, rgba(206, 176, 78, 0) 100%)',
+                zIndex: 1
+              }
+            }}
+          >
+            <Typography 
+              variant="h5"
+              component="div"
+              sx={{ 
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: { xs: '1.2rem', md: '1.4rem' },
+                fontWeight: 500,
+                color: '#555',
+                display: 'inline-block',
+                backgroundColor: '#f9f9f9',
+                px: 3,
+                position: 'relative',
+                zIndex: 2
+              }}
+            >
+              J'interviens sur toute la Champagne-Ardenne
+            </Typography>
+          </Box>
+        </motion.div>
+
+        {/* Contact cards container */}
+        <Box 
+          sx={{ 
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            gap: 4,
+            alignItems: 'flex-start',
+            mb: 8
+          }}
+        >
+          {/* Form Card */}
+          <Box 
+            sx={{ 
+              flex: { xs: '1', md: '1.5' },
+              width: '100%'
+            }}
+          >
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <Paper 
@@ -158,171 +365,210 @@ export default function Contact() {
                     mb: 4
                   }}
                 >
-                  Des questions sur nos solutions ? Nous sommes là pour vous aider. Remplissez le formulaire et nous vous répondrons dans les plus brefs délais.
+                  Des questions ? Envie d'un rendez-vous ? Je suis là pour vous aider. Remplissez le formulaire. Je vous recontacte dans les plus brefs délais.
                 </Typography>
-                <Box component="form" onSubmit={handleSubmit}>
-                  <Grid container spacing={3}>
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        label="Nom"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        variant="outlined"
-                        sx={{
-                          '& .MuiOutlinedInput-root': {
-                            '& fieldset': {
-                              borderColor: 'rgba(206, 176, 78, 0.2)',
-                              transition: 'border-color 0.3s ease'
-                            },
-                            '&:hover fieldset': {
-                              borderColor: '#ceb04e'
-                            },
-                            '&.Mui-focused fieldset': {
-                              borderColor: '#ceb04e'
-                            }
-                          },
-                          '& .MuiInputLabel-root': {
-                            color: '#666',
-                            '&.Mui-focused': {
-                              color: '#ceb04e'
-                            }
-                          }
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        label="Email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        variant="outlined"
-                        sx={{
-                          '& .MuiOutlinedInput-root': {
-                            '& fieldset': {
-                              borderColor: 'rgba(206, 176, 78, 0.2)',
-                              transition: 'border-color 0.3s ease'
-                            },
-                            '&:hover fieldset': {
-                              borderColor: '#ceb04e'
-                            },
-                            '&.Mui-focused fieldset': {
-                              borderColor: '#ceb04e'
-                            }
-                          },
-                          '& .MuiInputLabel-root': {
-                            color: '#666',
-                            '&.Mui-focused': {
-                              color: '#ceb04e'
-                            }
-                          }
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        label="Téléphone"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        variant="outlined"
-                        sx={{
-                          '& .MuiOutlinedInput-root': {
-                            '& fieldset': {
-                              borderColor: 'rgba(206, 176, 78, 0.2)',
-                              transition: 'border-color 0.3s ease'
-                            },
-                            '&:hover fieldset': {
-                              borderColor: '#ceb04e'
-                            },
-                            '&.Mui-focused fieldset': {
-                              borderColor: '#ceb04e'
-                            }
-                          },
-                          '& .MuiInputLabel-root': {
-                            color: '#666',
-                            '&.Mui-focused': {
-                              color: '#ceb04e'
-                            }
-                          }
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <TextField
-                        fullWidth
-                        label="Message"
-                        name="message"
-                        multiline
-                        rows={4}
-                        value={formData.message}
-                        onChange={handleChange}
-                        variant="outlined"
-                        sx={{
-                          '& .MuiOutlinedInput-root': {
-                            '& fieldset': {
-                              borderColor: 'rgba(206, 176, 78, 0.2)',
-                              transition: 'border-color 0.3s ease'
-                            },
-                            '&:hover fieldset': {
-                              borderColor: '#ceb04e'
-                            },
-                            '&.Mui-focused fieldset': {
-                              borderColor: '#ceb04e'
-                            }
-                          },
-                          '& .MuiInputLabel-root': {
-                            color: '#666',
-                            '&.Mui-focused': {
-                              color: '#ceb04e'
-                            }
-                          }
-                        }}
-                      />
-                    </Grid>
-                    <Grid item xs={12}>
-                      <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                        <Button
-                          type="submit"
-                          variant="contained"
-                          fullWidth
-                          sx={{
-                            backgroundColor: '#ceb04e',
-                            color: 'white',
-                            py: 2,
-                            px: 4,
-                            fontSize: '1.1rem',
-                            fontFamily: "'Montserrat', sans-serif",
-                            fontWeight: 500,
-                            textTransform: 'none',
-                            borderRadius: 1,
-                            boxShadow: '0 4px 12px rgba(206, 176, 78, 0.2)',
-                            transition: 'all 0.3s ease',
-                            '&:hover': {
-                              backgroundColor: '#b89a3e',
-                              boxShadow: '0 6px 16px rgba(206, 176, 78, 0.3)'
-                            }
-                          }}
-                        >
-                          Envoyer le message
-                        </Button>
-                      </motion.div>
-                    </Grid>
-                  </Grid>
+
+                <Box 
+                  component="form" 
+                  onSubmit={handleSubmit}
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: 3
+                  }}
+                >
+                  <TextField
+                    required
+                    fullWidth
+                    label="Prénom"
+                    name="firstname"
+                    value={formData.firstname}
+                    onChange={handleChange}
+                    disabled={loading}
+                    variant="outlined"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <PersonIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                    sx={{
+                      ...textFieldStyles,
+                      '& .MuiOutlinedInput-root': {
+                        ...textFieldStyles['& .MuiOutlinedInput-root'],
+                        height: '56px'
+                      }
+                    }}
+                  />
+
+                  <TextField
+                    required
+                    fullWidth
+                    label="Nom"
+                    name="lastname"
+                    value={formData.lastname}
+                    onChange={handleChange}
+                    disabled={loading}
+                    variant="outlined"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <PersonIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                    sx={{
+                      ...textFieldStyles,
+                      '& .MuiOutlinedInput-root': {
+                        ...textFieldStyles['& .MuiOutlinedInput-root'],
+                        height: '56px'
+                      }
+                    }}
+                  />
+
+                  <TextField
+                    fullWidth
+                    label="Entreprise (optionnel)"
+                    name="company_name"
+                    value={formData.company_name}
+                    onChange={handleChange}
+                    disabled={loading}
+                    variant="outlined"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <BusinessIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                    sx={{
+                      ...textFieldStyles,
+                      '& .MuiOutlinedInput-root': {
+                        ...textFieldStyles['& .MuiOutlinedInput-root'],
+                        height: '56px'
+                      }
+                    }}
+                  />
+
+                  <TextField
+                    required
+                    fullWidth
+                    label="Email"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    disabled={loading}
+                    variant="outlined"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <EmailIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                    sx={{
+                      ...textFieldStyles,
+                      '& .MuiOutlinedInput-root': {
+                        ...textFieldStyles['& .MuiOutlinedInput-root'],
+                        height: '56px'
+                      }
+                    }}
+                  />
+
+                  <TextField
+                    fullWidth
+                    label="Téléphone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    disabled={loading}
+                    variant="outlined"
+                    InputProps={{
+                      startAdornment: (
+                        <InputAdornment position="start">
+                          <PhoneIcon />
+                        </InputAdornment>
+                      ),
+                    }}
+                    sx={{
+                      ...textFieldStyles,
+                      '& .MuiOutlinedInput-root': {
+                        ...textFieldStyles['& .MuiOutlinedInput-root'],
+                        height: '56px'
+                      }
+                    }}
+                  />
+
+                  <TextField
+                    required
+                    fullWidth
+                    label="Message"
+                    name="message"
+                    multiline
+                    rows={6}
+                    value={formData.message}
+                    onChange={handleChange}
+                    disabled={loading}
+                    variant="outlined"
+                    sx={{
+                      ...textFieldStyles,
+                      '& .MuiOutlinedInput-root': {
+                        ...textFieldStyles['& .MuiOutlinedInput-root'],
+                        minHeight: '160px'
+                      }
+                    }}
+                  />
+
+                  <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      fullWidth
+                      disabled={loading}
+                      sx={{
+                        backgroundColor: '#ceb04e',
+                        color: 'white',
+                        py: 2,
+                        px: 4,
+                        height: '56px',
+                        fontSize: '1.1rem',
+                        fontFamily: "'Montserrat', sans-serif",
+                        fontWeight: 500,
+                        textTransform: 'none',
+                        borderRadius: 1,
+                        boxShadow: '0 4px 12px rgba(206, 176, 78, 0.2)',
+                        transition: 'all 0.3s ease',
+                        '&:hover': {
+                          backgroundColor: '#b89a3e',
+                          boxShadow: '0 6px 16px rgba(206, 176, 78, 0.3)'
+                        }
+                      }}
+                    >
+                      {loading ? (
+                        <CircularProgress size={24} color="inherit" />
+                      ) : (
+                        'Envoyer le message'
+                      )}
+                    </Button>
+                  </motion.div>
                 </Box>
               </Paper>
             </motion.div>
-          </Grid>
+          </Box>
 
-          <Grid item xs={12} md={6}>
+          {/* Contact Information Card */}
+          <Box 
+            sx={{ 
+              flex: 1,
+              width: '100%',
+              mt: { xs: 4, md: 0 }
+            }}
+          >
             <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <Paper 
@@ -379,9 +625,9 @@ export default function Contact() {
                         lineHeight: 1.8,
                         color: '#555'
                       }}>
-                        123 Rue de l'Innovation<br />
-                        51100 Reims<br />
-                        France
+                        Aurêa<br />
+                        Aurore MILLOT<br />
+                        51240 SAINT-GERMAIN-LA-VILLE
                       </Typography>
                     </Box>
                   </Box>
@@ -406,7 +652,7 @@ export default function Contact() {
                         lineHeight: 1.8,
                         color: '#555'
                       }}>
-                        +33 6 12 34 56 78
+                        06.82.94.03.52
                       </Typography>
                     </Box>
                   </Box>
@@ -431,8 +677,44 @@ export default function Contact() {
                         lineHeight: 1.8,
                         color: '#555'
                       }}>
-                        contact@aurea.fr
+                        aurea.expertise@gmail.com
                       </Typography>
+                    </Box>
+                  </Box>
+
+                  <Box sx={{ display: 'flex', alignItems: 'flex-start', mb: 4 }}>
+                    <LinkedInIcon sx={{ color: '#ceb04e', mr: 2, mt: 0.5, fontSize: '2rem' }} />
+                    <Box>
+                      <Typography 
+                        variant="h6" 
+                        sx={{
+                          fontFamily: "'Bitter', serif",
+                          color: '#333',
+                          mb: 1,
+                          fontSize: '1.2rem'
+                        }}
+                      >
+                        LinkedIn
+                      </Typography>
+                      <Link 
+                        href="https://www.linkedin.com/in/aurore-millot-08a02a1aa/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        sx={{ 
+                          fontFamily: "'Montserrat', sans-serif",
+                          fontSize: '1.1rem',
+                          lineHeight: 1.8,
+                          color: '#ceb04e',
+                          textDecoration: 'none',
+                          transition: 'color 0.3s ease',
+                          '&:hover': {
+                            color: '#b89a3e',
+                            textDecoration: 'underline'
+                          }
+                        }}
+                      >
+                        Aurêa sur LinkedIn
+                      </Link>
                     </Box>
                   </Box>
 
@@ -456,65 +738,34 @@ export default function Contact() {
                         lineHeight: 1.8,
                         color: '#555'
                       }}>
-                        Lundi - Vendredi: 9h00 - 18h00<br />
-                        Samedi - Dimanche: Fermé
+                        Du lundi au vendredi : 8h30 - 18h30
                       </Typography>
                     </Box>
                   </Box>
                 </Box>
-
-                <Box 
-                  sx={{ 
-                    mt: 6,
-                    p: 4,
-                    background: 'linear-gradient(135deg, rgba(206, 176, 78, 0.1) 0%, rgba(230, 200, 110, 0.1) 100%)',
-                    borderRadius: 2,
-                    border: '1px solid rgba(206, 176, 78, 0.2)',
-                    position: 'relative',
-                    overflow: 'hidden',
-                    '&:before': {
-                      content: '""',
-                      position: 'absolute',
-                      top: 0,
-                      left: 0,
-                      right: 0,
-                      bottom: 0,
-                      background: 'radial-gradient(circle at 50% 50%, rgba(206, 176, 78, 0.1) 0%, rgba(206, 176, 78, 0) 70%)',
-                      zIndex: 1
-                    }
-                  }}
-                >
-                  <Typography 
-                    sx={{ 
-                      fontFamily: "'Montserrat', sans-serif",
-                      fontSize: '1.1rem',
-                      lineHeight: 1.8,
-                      color: '#555',
-                      fontStyle: 'italic',
-                      position: 'relative',
-                      zIndex: 2
-                    }}
-                  >
-                    "Notre engagement est d'offrir un service et un accompagnement exceptionnels à tous nos clients. Votre satisfaction est notre priorité."
-                  </Typography>
-                  <Typography 
-                    sx={{ 
-                      fontFamily: "'Bitter', serif",
-                      fontWeight: 600,
-                      mt: 2,
-                      color: '#ceb04e',
-                      position: 'relative',
-                      zIndex: 2
-                    }}
-                  >
-                    — L'équipe AURÊA
-                  </Typography>
-                </Box>
               </Paper>
             </motion.div>
-          </Grid>
-        </Grid>
+          </Box>
+        </Box>
       </Container>
+
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      >
+        <Alert 
+          onClose={handleCloseSnackbar} 
+          severity={snackbar.severity}
+          sx={{ 
+            width: '100%',
+            fontFamily: "'Montserrat', sans-serif",
+          }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 } 

@@ -454,7 +454,7 @@ function Home() {
                       letterSpacing: '0.01em',
                     }}
                   >
-                    Lancez vous sans prise de tête
+                    Lancez vous en toute sérénité
                   </Typography>
                   <Typography 
                     variant="body1" 
@@ -562,7 +562,7 @@ function Home() {
                 }}
               >
                 La transition écologique, l'utilisation d'une énergie renouvelable, locale et inépuisable, les économies
-                financières, ou encore les obligations liées à la loi ApER par exemple, sont autant de sujets au cœur
+                financières, ou encore les obligations liées à la loi APER par exemple, sont autant de sujets au cœur
                 des discussions aujourd'hui.
               </Typography>
               <Typography 
@@ -916,7 +916,7 @@ function Home() {
                 },
               }}
             >
-              Nous contacter
+              Nous contacter (premier rendez-vous gratuit)
             </Button>
           </motion.div>
         </Box>

@@ -8,9 +8,9 @@ function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const menuItems = [
-    { text: 'Home', path: '/' },
-    { text: 'About', path: '/about' },
-    { text: 'Services', path: '/services' },
+    { text: 'Accueil', path: '/' },
+    { text: 'A propos', path: '/about' },
+    { text: 'Mes Prestations', path: '/services' },
     { text: 'Contact', path: '/contact' },
     { text: 'Blog', path: '/blog' },
   ];
