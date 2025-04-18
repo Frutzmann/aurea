@@ -1,8 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { Resend } from 'resend';
 
-// Initialize Resend
-const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Initialize Supabase
 const supabase = createClient(
@@ -65,20 +62,7 @@ export default async function handler(req, res) {
       console.error('Supabase error:', supabaseError);
       return res.status(500).json({ error: 'Error storing contact' });
     }
-
-    // Send notification email to admin
-    await resend.emails.send({
-      from: 'Aurêa Contact <contact@aurea.fr>',
-      to: 'aurea.expertise@gmail.com',
-      ...AdminNotificationEmail({ firstname, lastname, company_name, email, phone, message })
-    });
-
-    // Send confirmation email to user
-    await resend.emails.send({
-      from: 'Aurêa <contact@aurea.fr>',
-      to: email,
-      ...UserConfirmationEmail({ firstname, lastname })
-    });
+   
 
     return res.status(200).json({ 
       success: true, 
