@@ -1,0 +1,97 @@
+:root {
+  --primary-gold: #ceb04e;
+  --primary-black: #000000;
+  --background-off-white: #faf9f6;
+  --text-black: #333333;
+  --text-secondary: #666666;
+  --border-color: rgba(206, 176, 78, 0.2);
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --shadow-button: 0 4px 12px rgba(206, 176, 78, 0.3);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-off-white);
+  color: var(--primary-black);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Bitter', serif;
+  color: var(--primary-gold);
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+  padding: 20px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Material-UI overrides */
+.MuiPaper-root {
+  background-color: white !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: var(--shadow-card) !important;
+}
+
+.MuiButton-contained {
+  background-color: var(--primary-gold) !important;
+  color: white !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 600 !important;
+  box-shadow: var(--shadow-button) !important;
+}
+
+.MuiButton-contained:hover {
+  background-color: #b89b3f !important;
+  box-shadow: 0 6px 16px rgba(206, 176, 78, 0.4) !important;
+}
+
+.MuiTextField-root .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+  border-color: var(--border-color) !important;
+}
+
+.MuiTextField-root .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+  border-color: var(--primary-gold) !important;
+}
+
+.MuiTextField-root .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+  border-color: var(--primary-gold) !important;
+}
+
+.MuiTextField-root .MuiInputLabel-root {
+  color: var(--text-secondary) !important;
+}
+
+.MuiTextField-root .MuiInputLabel-root.Mui-focused {
+  color: var(--primary-gold) !important;
+}
+
+/* Ensure footer stays at bottom */
+footer {
+  flex-shrink: 0;
+} 
