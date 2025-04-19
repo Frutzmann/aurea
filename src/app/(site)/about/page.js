@@ -11,9 +11,11 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  Button,
 } from '@mui/material';
 import { motion,  } from 'framer-motion';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import Link from 'next/link';
 
 export default function About() {
   return (
@@ -459,7 +461,7 @@ export default function About() {
             }
           }}
         >
-          <Container maxWidth="lg">
+          <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -509,30 +511,36 @@ export default function About() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                style={{ position: 'relative', zIndex: 10 }}
               >
-                <Box 
-                  component="a" 
+                <a 
                   href="/contact" 
-                  sx={{ 
+                  style={{ 
                     display: 'inline-block',
-                    px: 4,
-                    py: 2,
+                    padding: '12px 32px',
                     backgroundColor: '#ceb04e',
                     color: 'white',
                     textDecoration: 'none',
-                    borderRadius: 1,
+                    borderRadius: '4px',
                     fontFamily: "'Montserrat', sans-serif",
                     fontWeight: 500,
                     transition: 'all 0.3s ease',
                     boxShadow: '0 4px 12px rgba(206, 176, 78, 0.2)',
-                    '&:hover': {
-                      backgroundColor: '#b89a3e',
-                      boxShadow: '0 6px 16px rgba(206, 176, 78, 0.3)',
-                    },
+                    position: 'relative',
+                    zIndex: 10,
+                    cursor: 'pointer',
+                  }}
+                  onMouseOver={(e) => {
+                    e.currentTarget.style.backgroundColor = '#b89a3e';
+                    e.currentTarget.style.boxShadow = '0 6px 16px rgba(206, 176, 78, 0.3)';
+                  }}
+                  onMouseOut={(e) => {
+                    e.currentTarget.style.backgroundColor = '#ceb04e';
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(206, 176, 78, 0.2)';
                   }}
                 >
                   Nous contacter
-                </Box>
+                </a>
               </motion.div>
             </motion.div>
           </Container>

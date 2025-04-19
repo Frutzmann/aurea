@@ -321,6 +321,8 @@ pertinence structurelle, facilité de réalisation, emplacement intelligent, et 
                   color: '#333',
                   textAlign: 'justify',
                   lineHeight: 1.8,
+                  fontFamily: "'Montserrat', sans-serif",
+                  fontSize: '0.9rem',
                 }}>
                   {selectedServiceData.intro}
                 </Box>
