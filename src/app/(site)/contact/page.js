@@ -14,6 +14,10 @@ import {
   Snackbar,
   CircularProgress,
   InputAdornment,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -25,13 +29,23 @@ import BusinessIcon from '@mui/icons-material/Business';
 import PersonIcon from '@mui/icons-material/Person'; 
 import { ContactAPI } from '@/lib/api/client';
 
+// Phone country codes
+const countryCodes = [
+  { code: '+33', label: 'France (+33)' },
+  { code: '+32', label: 'Belgique (+32)' },
+  { code: '+352', label: 'Luxembourg (+352)' },
+  { code: '+41', label: 'Suisse (+41)' },
+  { code: '+49', label: 'Allemagne (+49)' },
+];
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     firstname: '',
     lastname: '',
     company_name: '',
     email: '',
-    phone: '',
+    countryCode: '+33',
+    phoneNumber: '',
     message: '',
   });
 
@@ -47,21 +61,27 @@ export default function Contact() {
     setLoading(true);
 
     try {
-      const { data } = await ContactAPI.create(formData);
+      // Combine country code and phone number
+      const phone = formData.phoneNumber ? `${formData.countryCode}${formData.phoneNumber.replace(/^0+/, '')}` : '';
       
-      // Clear form
+      const response = await ContactAPI.create({
+        ...formData,
+        phone,
+      });
+
       setFormData({
         firstname: '',
         lastname: '',
         company_name: '',
         email: '',
-        phone: '',
+        countryCode: '+33',
+        phoneNumber: '',
         message: '',
       });
 
       setSnackbar({
         open: true,
-        message: data.message,
+        message: response.message,
         severity: 'success'
       });
 
@@ -78,10 +98,11 @@ export default function Contact() {
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleCloseSnackbar = () => {
@@ -476,29 +497,70 @@ export default function Contact() {
                     }}
                   />
 
-                  <TextField
-                    fullWidth
-                    label="Téléphone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    disabled={loading}
-                    variant="outlined"
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <PhoneIcon />
-                        </InputAdornment>
-                      ),
-                    }}
-                    sx={{
-                      ...textFieldStyles,
-                      '& .MuiOutlinedInput-root': {
-                        ...textFieldStyles['& .MuiOutlinedInput-root'],
-                        height: '56px'
-                      }
-                    }}
-                  />
+                  <Box sx={{ display: 'flex', gap: 2 }}>
+                    <FormControl sx={{ width: '30%' }}>
+                      <InputLabel id="country-code-label">Indicatif</InputLabel>
+                      <Select
+                        labelId="country-code-label"
+                        id="country-code"
+                        name="countryCode"
+                        value={formData.countryCode}
+                        onChange={handleChange}
+                        disabled={loading}
+                        sx={{
+                          height: '56px',
+                          '& .MuiOutlinedInput-notchedOutline': {
+                            borderColor: 'rgba(206, 176, 78, 0.2)',
+                          },
+                          '&:hover .MuiOutlinedInput-notchedOutline': {
+                            borderColor: '#ceb04e',
+                          },
+                          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                            borderColor: '#ceb04e',
+                          },
+                        }}
+                      >
+                        {countryCodes.map((country) => (
+                          <MenuItem key={country.code} value={country.code}>
+                            {country.label}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    </FormControl>
+
+                    <TextField
+                      fullWidth
+                      label="Téléphone"
+                      name="phoneNumber"
+                      value={formData.phoneNumber}
+                      onChange={handleChange}
+                      disabled={loading}
+                      variant="outlined"
+                      placeholder="06 12 34 56 78"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start">
+                            <PhoneIcon />
+                          </InputAdornment>
+                        ),
+                      }}
+                      sx={{
+                        flex: 1,
+                        '& .MuiOutlinedInput-root': {
+                          height: '56px',
+                          '& fieldset': {
+                            borderColor: 'rgba(206, 176, 78, 0.2)',
+                          },
+                          '&:hover fieldset': {
+                            borderColor: '#ceb04e',
+                          },
+                          '&.Mui-focused fieldset': {
+                            borderColor: '#ceb04e',
+                          },
+                        },
+                      }}
+                    />
+                  </Box>
 
                   <TextField
                     required

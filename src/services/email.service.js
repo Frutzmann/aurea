@@ -7,7 +7,7 @@ class EmailService {
   async sendContactConfirmation({ firstname, lastname, email }) {
     try {
       await resend.emails.send({
-        from: 'Aurêa <contact@aurea-expertise.fr>',
+        from: 'utzmann.francois@gmail.com',
         to: email,
         subject: 'Confirmation de votre message - Aurêa',
         html: `
@@ -29,7 +29,7 @@ class EmailService {
   async sendAdminNotification({ firstname, lastname, company_name, email, phone, message }) {
     try {
       await resend.emails.send({
-        from: 'Contact Form <contact@aurea-expertise.fr>',
+        from: 'utzmann.francois@gmail.com',
         to: adminEmail,
         subject: `Nouveau message de ${firstname} ${lastname}`,
         html: `

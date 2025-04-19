@@ -27,9 +27,11 @@ class Contact {
     }
 
     // Phone format validation (optional)
+    // Accepts international format with optional spaces, dashes, and parentheses
+    // Examples: +33612345678, +1 (555) 123-4567, 06 12 34 56 78
     if (this.phone) {
-      const phoneRegex = /^(?:(?:\+|00)33|0)\s*[1-9](?:[\s.-]*\d{2}){4}$/;
-      if (!phoneRegex.test(this.phone)) {
+      const phoneRegex = /^\+?(?:[0-9] ?){6,14}[0-9]$/;
+      if (!phoneRegex.test(this.phone.replace(/[-()]/g, ''))) {
         errors.push('Format de téléphone invalide');
       }
     }
