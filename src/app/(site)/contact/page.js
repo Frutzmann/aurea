@@ -38,6 +38,17 @@ const countryCodes = [
   { code: '+49', label: 'Allemagne (+49)' },
 ];
 
+const errorMessages = {
+  firstname: 'Le prénom est requis',
+  lastname: 'Le nom est requis',
+  email: 'L&apos;email est requis',
+  emailFormat: 'Format d&apos;email invalide',
+  phone: 'Format de téléphone invalide',
+  message: 'Le message est requis',
+  error: 'Une erreur est survenue lors de l&apos;envoi du message',
+  success: 'Votre message a été envoyé avec succès'
+};
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     firstname: '',
@@ -197,7 +208,7 @@ export default function Contact() {
                 lineHeight: 1.6
               }}
             >
-              Discutons de votre projet et découvrez comment nous pouvons vous accompagner
+              Discutons de votre projet et découvrons comment nous pouvons vous accompagner
             </Typography>
           </motion.div>
         </Container>
@@ -261,7 +272,7 @@ export default function Contact() {
                 mx: 'auto'
               }}
             >
-              "Mon engagement est d'offrir un service et un accompagnement exceptionnels à tous mes clients. Votre satisfaction est ma priorité."
+              &quot;Mon engagement est d&apos;offrir un service et un accompagnement exceptionnels à tous mes clients. Votre satisfaction est ma priorité.&quot;
             </Typography>
             <Typography 
               sx={{ 
@@ -317,7 +328,7 @@ export default function Contact() {
                 zIndex: 2
               }}
             >
-              J'interviens sur toute la Champagne-Ardenne
+              J&apos;interviens sur toute la Champagne-Ardenne
             </Typography>
           </Box>
         </motion.div>
@@ -385,7 +396,7 @@ export default function Contact() {
                     mb: 4
                   }}
                 >
-                  Des questions ? Envie d'un rendez-vous ? Je suis là pour vous aider. Remplissez le formulaire. Je vous recontacte dans les plus brefs délais.
+                  Des questions ? Envie d&apos;un rendez-vous ? Je suis là pour vous aider. Remplissez le formulaire. Je vous recontacte dans les plus brefs délais.
                 </Typography>
 
                 <Box 
