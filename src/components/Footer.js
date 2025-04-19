@@ -41,7 +41,7 @@ function Footer() {
                 textShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
               }}
             >
-              AUREA
+              AURÊA
             </Typography>
             <Typography 
               variant="body1" 
@@ -51,7 +51,7 @@ function Footer() {
                 lineHeight: 1.6,
               }}
             >
-              Empowering your home with sustainable solar solutions.
+              Accompagner votre transition énergétique avec des solutions durables.
             </Typography>
           </Box>
 
@@ -73,13 +73,18 @@ function Footer() {
                 mb: 2,
               }}
             >
-              Quick Links
+              Liens Rapides
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-              {['Home', 'About', 'Services', 'Contact'].map((item) => (
+              {[
+                { en: 'Home', fr: 'Accueil' },
+                { en: 'About', fr: 'À propos' },
+                { en: 'Services', fr: 'Services' },
+                { en: 'Contact', fr: 'Contact' }
+              ].map((item) => (
                 <Link 
-                  key={item}
-                  href={`/${item.toLowerCase()}`}
+                  key={item.en}
+                  href={`/${item.en.toLowerCase()}`}
                   style={{ 
                     color: 'white',
                     textDecoration: 'none',
@@ -91,7 +96,7 @@ function Footer() {
                     },
                   }}
                 >
-                  {item}
+                  {item.fr}
                 </Link>
               ))}
             </Box>
@@ -112,7 +117,7 @@ function Footer() {
                 mb: 2,
               }}
             >
-              Contact Info
+              Informations de Contact
             </Typography>
             <Typography 
               variant="body1" 
@@ -122,11 +127,11 @@ function Footer() {
                 lineHeight: 1.8,
               }}
             >
-              Email: info@aurea.com
+              Email: aurea.expertise@gmail.com
               <br />
-              Phone: (555) 123-4567
+              Téléphone: 06.82.94.03.52
               <br />
-              Address: 123 Solar Street, Energy City
+              Adresse: 51240 SAINT-GERMAIN-LA-VILLE
             </Typography>
           </Box>
         </Box>
@@ -147,7 +152,7 @@ function Footer() {
               opacity: 0.8,
             }}
           >
-            © {new Date().getFullYear()} AUREA. All rights reserved.
+            © {new Date().getFullYear()} AURÊA. Tous droits réservés.
           </Typography>
         </Box>
       </Container>

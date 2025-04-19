@@ -1,18 +1,22 @@
 "use client"
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { AppBar, Toolbar, Typography, Button, IconButton, Drawer, List, ListItem, ListItemText, Box } from '@mui/material';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { AppBar, Toolbar, Button, IconButton, Drawer, List, ListItem, ListItemText, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
 function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const router = useRouter();
+  const isHomePage = router.pathname === '/';
 
   const menuItems = [
     { text: 'Accueil', path: '/' },
     { text: 'A propos', path: '/about' },
     { text: 'Mes Prestations', path: '/services' },
-    { text: 'Contact', path: '/contact' },
-    { text: 'Blog', path: '/blog' },
+    // { text: 'Blog', path: '/blog' },
+    { text: 'Contact', path: '/contact', isButton: true },
   ];
 
   const handleDrawerToggle = () => {
@@ -22,61 +26,113 @@ function Navbar() {
   return (
     <>
       <AppBar 
-        position="static" 
+        position="fixed" 
         sx={{ 
-          background: 'linear-gradient(135deg, #ceb04e 0%, #e6c86e 100%)',
-          boxShadow: '0 2px 20px rgba(206, 176, 78, 0.2)',
-          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+          background: 'rgba(255, 255, 255, 0.95)', 
+          borderBottom: '1px solid rgba(0, 0, 0, 0.05)',
+          transition: 'all 0.3s ease',
+          backdropFilter: 'blur(10px)'
         }}
       >
-        <Toolbar sx={{ py: 1 }}>
-          <Typography
-            variant="h5"
+        <Toolbar 
+          sx={{ 
+            px: { xs: 2, sm: 4, md: 6, lg: 8 },
+            py: 1,
+            display: 'flex',
+            justifyContent: 'space-between',
+            gap: 2,
+          }}
+        >
+          {/* Logo and Text */}
+          <Box
             component={Link}
             href="/"
             sx={{
-              flexGrow: 1,
+              display: 'flex',
+              alignItems: 'center',
               textDecoration: 'none',
-              color: 'white',
-              fontWeight: 700,
-              letterSpacing: '0.1em',
-              fontFamily: "'Bitter', serif",
-              textShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+              gap: 3,
             }}
           >
-            AUREA
-          </Typography>
+            <Box
+              sx={{
+                position: 'relative',
+                width: { xs: '100px', sm: '120px' },
+                height: { xs: '40px', sm: '48px' },
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Image
+                src="/images/logo/logo.png"
+                alt="AURÊA Logo"
+                layout="fill"
+                objectFit="contain"
+                priority
+              />
+            </Box>
+            <Box
+              sx={{
+                display: { xs: 'none', md: 'block' },
+                color: '#333',
+                fontSize: { md: '0.75rem', lg: '0.85rem' },
+                fontWeight: 500,
+                whiteSpace: 'nowrap',
+              }}
+            >
+              Calcul de structure et études photovoltaiques
+            </Box>
+          </Box>
 
           {/* Desktop Menu */}
-          <Box className="d-none d-md-flex" sx={{ gap: 1 }}>
+          <Box 
+            sx={{ 
+              display: { xs: 'none', md: 'flex' },
+              alignItems: 'center',
+              gap: 4,
+            }}
+          >
             {menuItems.map((item) => (
               <Button
                 key={item.text}
                 component={Link}
                 href={item.path}
-                sx={{
+                variant={item.isButton ? "contained" : "text"}
+                sx={item.isButton ? {
+                  bgcolor: '#333',
                   color: 'white',
-                  fontFamily: "'Montserrat', sans-serif",
-                  fontWeight: 500,
-                  fontSize: '0.9rem',
-                  letterSpacing: '0.05em',
+                  px: 3,
+                  py: 1,
+                  borderRadius: 1,
                   textTransform: 'none',
+                  fontSize: '0.9rem',
+                  fontWeight: 500,
+                  '&:hover': {
+                    bgcolor: '#000',
+                  },
+                } : {
+                  color: router.pathname === item.path ? '#ceb04e' : '#333',
+                  textTransform: 'none',
+                  fontSize: '0.9rem',
+                  fontWeight: 500,
                   position: 'relative',
                   '&::after': {
                     content: '""',
                     position: 'absolute',
-                    bottom: 0,
-                    left: 0,
-                    width: '100%',
+                    bottom: -2,
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    width: router.pathname === item.path ? '100%' : '0%',
                     height: '2px',
-                    background: 'rgba(255, 255, 255, 0.5)',
-                    transform: 'scaleX(0)',
-                    transition: 'transform 0.3s ease',
+                    backgroundColor: '#ceb04e',
+                    transition: 'all 0.3s ease',
                   },
                   '&:hover': {
-                    backgroundColor: 'transparent',
+                    bgcolor: 'transparent',
+                    color: '#ceb04e',
                     '&::after': {
-                      transform: 'scaleX(1)',
+                      width: '100%',
                     },
                   },
                 }}
@@ -90,20 +146,20 @@ function Navbar() {
           <IconButton
             color="inherit"
             aria-label="open drawer"
-            edge="start"
+            edge="end"
             onClick={handleDrawerToggle}
             sx={{ 
               display: { md: 'none' },
-              color: 'white',
-              '&:hover': {
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-              },
+              color: '#333'
             }}
           >
             <MenuIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
+
+      {/* Add a spacer to prevent content from being hidden behind the fixed navbar */}
+      {!isHomePage && <Box sx={{ height: { xs: 56, sm: 64, md: 72 } }} />}
 
       {/* Mobile Menu Drawer */}
       <Drawer
@@ -116,12 +172,12 @@ function Navbar() {
         }}
         PaperProps={{
           sx: {
-            background: 'linear-gradient(135deg, #ceb04e 0%, #e6c86e 100%)',
-            color: 'white',
+            width: 250,
+            bgcolor: 'white',
           },
         }}
       >
-        <List sx={{ width: 250, pt: 2 }}>
+        <List sx={{ pt: 2 }}>
           {menuItems.map((item) => (
             <ListItem
               button
@@ -130,15 +186,23 @@ function Navbar() {
               href={item.path}
               onClick={handleDrawerToggle}
               sx={{
-                fontFamily: "'Montserrat', sans-serif",
-                fontWeight: 500,
-                letterSpacing: '0.05em',
+                py: 2,
+                color: router.pathname === item.path ? '#ceb04e' : '#333',
+                bgcolor: router.pathname === item.path ? 'rgba(206, 176, 78, 0.1)' : 'transparent',
                 '&:hover': {
-                  backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                  bgcolor: 'rgba(0, 0, 0, 0.05)',
                 },
               }}
             >
-              <ListItemText primary={item.text} />
+              <ListItemText 
+                primary={item.text} 
+                sx={{
+                  '& .MuiTypography-root': {
+                    fontSize: '0.9rem',
+                    fontWeight: router.pathname === item.path ? 600 : 500,
+                  },
+                }}
+              />
             </ListItem>
           ))}
         </List>

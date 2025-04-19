@@ -13,12 +13,14 @@ function Home() {
         sx={{
           position: 'relative',
           color: 'white',
-          py: { xs: 10, md: 16 },
+          pt: 0,
+          pb: { xs: 10, md: 16 },
           mb: { xs: 8, md: 12 },
           overflow: 'hidden',
-          minHeight: { xs: '600px', md: '85vh' },
+          minHeight: { xs: '600px', md: '100vh' },
           display: 'flex',
           alignItems: 'center',
+          mt: '-64px', // Offset for navbar height
         }}
       >
         <Box
@@ -46,11 +48,11 @@ function Home() {
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'linear-gradient(to right, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.5) 100%)',
+            background: 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 20%, rgba(0,0,0,0.5) 100%)',
             zIndex: 1,
           }}
         />
-        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2 }}>
+        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 2, mt: { xs: 12, md: 16 } }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}

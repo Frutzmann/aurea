@@ -1,11 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
-
-
-// Initialize Supabase
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_ROLE_KEY
-);
+import { supabase } from '../../lib/supabase';
 
 const AdminNotificationEmail = ({ firstname, lastname, company_name, email, phone, message }) => ({
   subject: `Nouveau message de ${firstname} ${lastname}`,
@@ -41,6 +34,11 @@ export default async function handler(req, res) {
   try {
     const { firstname, lastname, company_name, email, phone, message } = req.body;
 
+    // Validate required fields
+    if (!firstname || !lastname || !email || !message) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
     // Store in Supabase
     const { data, error: supabaseError } = await supabase
       .from('contacts')
@@ -62,7 +60,6 @@ export default async function handler(req, res) {
       console.error('Supabase error:', supabaseError);
       return res.status(500).json({ error: 'Error storing contact' });
     }
-   
 
     return res.status(200).json({ 
       success: true, 

@@ -749,6 +749,138 @@ export default function Contact() {
         </Box>
       </Container>
 
+      {/* Maps Section - Now positioned after the contact cards */}
+      <Box sx={{ py: 8, backgroundColor: 'white' }}>
+        <Container maxWidth="lg">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <Typography
+              variant="h2"
+              align="center"
+              sx={{
+                mb: 6,
+                fontWeight: 700,
+                color: '#ceb04e', // Golden color to match other headers
+                fontSize: { xs: '2rem', md: '2.5rem' },
+                letterSpacing: '0.02em',
+                position: 'relative',
+                '&:after': {
+                  content: '""',
+                  position: 'absolute',
+                  bottom: -10,
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  width: 80,
+                  height: 3,
+                  background: 'linear-gradient(90deg, #ceb04e, #e6c86e)',
+                  borderRadius: 2,
+                }
+              }}
+            >
+              Notre zone d'intervention
+            </Typography>
+            
+            <Grid container spacing={4}>
+              <Grid item xs={12} md={6}>
+                <Box
+                  sx={{
+                    position: 'relative',
+                    borderRadius: 2,
+                    overflow: 'hidden',
+                    boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
+                    transition: 'all 0.3s ease',
+                    '&:hover': {
+                      transform: 'translateY(-5px)',
+                      boxShadow: '0 12px 40px rgba(0,0,0,0.15)',
+                    },
+                  }}
+                >
+                  <Box
+                    component="img"
+                    src="/images/contact/périmètre_d_intervention.png"
+                    alt="Périmètre d'intervention Aurêa"
+                    sx={{
+                      width: '100%',
+                      height: 'auto',
+                      display: 'block',
+                      transition: 'transform 0.5s ease',
+                      '&:hover': {
+                        transform: 'scale(1.03)',
+                      }
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)',
+                      color: 'white',
+                      p: 3,
+                    }}
+                  >
+                    <Typography variant="h6" sx={{ fontWeight: 600, fontSize: '1.2rem' }}>
+                      Périmètre d'intervention
+                    </Typography>
+                  </Box>
+                </Box>
+              </Grid>
+              
+              <Grid item xs={12} md={6}>
+                <Box
+                  sx={{
+                    position: 'relative',
+                    borderRadius: 2,
+                    overflow: 'hidden',
+                    boxShadow: '0 8px 30px rgba(0,0,0,0.12)',
+                    transition: 'all 0.3s ease',
+                    '&:hover': {
+                      transform: 'translateY(-5px)',
+                      boxShadow: '0 12px 40px rgba(0,0,0,0.15)',
+                    },
+                  }}
+                >
+                  <Box
+                    component="img"
+                    src="/images/contact/carte_St_Germain.jpg"
+                    alt="Carte de St Germain"
+                    sx={{
+                      width: '100%',
+                      height: 'auto',
+                      display: 'block',
+                      transition: 'transform 0.5s ease',
+                      '&:hover': {
+                        transform: 'scale(1.03)',
+                      }
+                    }}
+                  />
+                  <Box
+                    sx={{
+                      position: 'absolute',
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      background: 'linear-gradient(to top, rgba(0,0,0,0.8), transparent)',
+                      color: 'white',
+                      p: 3,
+                    }}
+                  >
+                    <Typography variant="h6" sx={{ fontWeight: 600, fontSize: '1.2rem' }}>
+                      Carte de St Germain
+                    </Typography>
+                  </Box>
+                </Box>
+              </Grid>
+            </Grid>
+          </motion.div>
+        </Container>
+      </Box>
+
       <Snackbar
         open={snackbar.open}
         autoHideDuration={6000}

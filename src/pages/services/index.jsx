@@ -30,6 +30,15 @@ export default function Services() {
       id: 'photovoltaic',
       title: 'Étude photovoltaïque',
       description: 'Solutions complètes pour vos projets photovoltaïques',
+      intro: `Le photovoltaïque offre aux particuliers et aux entreprises une opportunité de réduire leurs factures
+d'électricité grâce à l'autoconsommation, avec ou sans vente de surplus, tout en acquérant une
+certaine autonomie énergétique.\n\nPour les professionnels, il représente par ailleurs une source de revenus supplémentaire avec la
+vente totale de l'énergie produite, garantissant un investissement pérenne et rentable.\n\nQue ce soit sur une maison, un bâtiment existant ou en construction, ou bien encore sur des
+ombrières de parking, vous bénéficierez d'un accompagnement personnalisé en vue d'une
+installation performante et durable.\n\nJ'endosserai tour à tour, les rôles de conseillère technique, interlocutrice principale, intermédiaire
+avec les différents acteurs de votre projet (installateur photovoltaïque et gestionnaire de réseau
+Enedis notamment) ou encore assistance à maîtrise d'ouvrage, pour vous accompagner au mieux
+dans votre projet.`,
       steps: [
         {
           title: 'Visite sur site et analyse du besoin',
@@ -70,6 +79,12 @@ export default function Services() {
       id: 'structure',
       title: 'Étude de structure',
       description: 'Analyse et renforcement de structures pour vos projets',
+      intro: `Contrairement à un diagnostic visuel, peu fiable, et au-delà d'une demande contractuelle de votre
+assurance, une étude de structure est destinée à confirmer, dans les règles de l'art, que votre
+bâtiment est capable de supporter les charges qui lui sont appliquées.\n\nEn tant qu'ingénieur structure, je m'applique à analyser le bâtiment conformément aux normes de
+construction, tout en apportant une attention particulière à vos propres contraintes, notamment
+dans son utilisation quotidienne (stockage, passage d'engins, …).\n\nMon objectif, en vous proposant des renforts, s'ils sont nécessaires, est de trouver l'équilibre entre
+pertinence structurelle, facilité de réalisation, emplacement intelligent, et optimisation des coûts.`,
       steps: [
         {
           title: 'Visite sur site et prise de cotes du bâtiment',
@@ -206,252 +221,358 @@ export default function Services() {
         <AnimatePresence mode="wait">
           <motion.div
             key={selectedSection}
-            initial={{ 
-              opacity: 0,
-              x: direction === 'next' ? 100 : -100,
-            }}
-            animate={{ 
-              opacity: 1,
-              x: 0,
-            }}
-            exit={{ 
-              opacity: 0,
-              x: direction === 'next' ? -100 : 100,
-            }}
-            transition={{ 
-              duration: 0.5,
-              type: 'spring',
-              stiffness: 300,
-              damping: 30,
-            }}
+            initial={{ opacity: 0, x: direction === 'next' ? 100 : -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: direction === 'next' ? -100 : 100 }}
+            transition={{ duration: 0.5 }}
           >
-            <Box sx={{ position: 'relative' }}>
-              <IconButton
-                onClick={() => handleSectionChange('prev')}
+            <Box sx={{
+              maxWidth: '800px', 
+              mx: 'auto',
+              mb: 0,
+            }}>
+              <Box
                 sx={{
-                  position: 'fixed',
-                  left: { xs: 16, md: 32 },
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  color: '#ceb04e',
-                  bgcolor: 'rgba(255, 255, 255, 0.8)',
-                  backdropFilter: 'blur(4px)',
-                  boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
-                  zIndex: 10,
-                  '&:hover': {
-                    bgcolor: 'rgba(206, 176, 78, 0.1)',
-                    transform: 'translateY(-50%) scale(1.1)',
-                  },
-                }}
-              >
-                <ArrowBackIcon />
-              </IconButton>
-
-              <Paper
-                elevation={0} 
-                sx={{
-                  p: { xs: 3, md: 6 },
-                  bgcolor: 'white',
-                  borderRadius: 2,
-                  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
-                  border: '1px solid rgba(206, 176, 78, 0.2)',
-                  overflow: 'hidden',
+                  textAlign: 'center',
+                  mb: 3,
                   position: 'relative',
-                  '&:before': {
+                  '&::before, &::after': {
                     content: '""',
                     position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    height: '4px',
-                    background: 'linear-gradient(90deg, #ceb04e, #e6c86e)',
+                    top: '50%',
+                    width: '60px',
+                    height: '2px',
+                    background: 'linear-gradient(90deg, rgba(206, 176, 78, 0), #ceb04e)',
+                    zIndex: 0,
+                  },
+                  '&::before': {
+                    right: '55%',
+                    marginRight: '20px',
+                  },
+                  '&::after': {
+                    left: '55%',
+                    marginLeft: '20px',
+                    background: 'linear-gradient(90deg, #ceb04e, rgba(206, 176, 78, 0))',
                   },
                 }}
               >
                 <Typography
-                  variant="h3"
+                  variant="h4"
                   sx={{
-                    mb: 3, 
                     color: '#ceb04e',
                     fontFamily: 'Bitter, serif',
-                    fontWeight: 600,
+                    fontWeight: 500,
                     fontSize: { xs: '1.8rem', md: '2.2rem' },
                     letterSpacing: '0.02em',
-                  }}
-                >
-                  {selectedServiceData.title}
-                </Typography>
-
-                <Divider sx={{ mb: 4, borderColor: 'rgba(206, 176, 78, 0.2)' }} />
-
-                <Typography
-                  variant="body1"
-                  sx={{
-                    mb: 6, 
-                    color: '#333',
-                    fontFamily: 'Montserrat, sans-serif',
-                    fontSize: '1.1rem',
-                    lineHeight: 1.8,
-                    letterSpacing: '0.01em',
-                  }}
-                >
-                  {selectedServiceData.description}
-                </Typography>
-
-                {/* Vertical Timeline */}
-                <Box sx={{ position: 'relative', mb: 6 }}>
-                  {/* Timeline line */}
-                  <Box
-                    sx={{
+                    display: 'inline-block',
+                    position: 'relative',
+                    px: 3,
+                    py: 1,
+                    backgroundColor: '#faf9f6',
+                    zIndex: 1,
+                    '&::before, &::after': {
+                      content: '""',
                       position: 'absolute',
-                      left: '50%',
-                      top: 0,
-                      bottom: 0,
-                      width: '2px',
-                      background: 'linear-gradient(to bottom, rgba(206, 176, 78, 0.3), rgba(230, 200, 110, 0.3))',
-                      transform: 'translateX(-50%)',
+                      width: '10px',
+                      height: '10px',
+                      border: '2px solid #ceb04e',
+                      borderRadius: '50%',
+                      background: '#faf9f6',
+                      zIndex: 2,
+                    },
+                    '&::before': {
+                      left: 0,
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                    },
+                    '&::after': {
+                      right: 0,
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                    },
+                  }}
+                >
+                  {selectedSection === 'photovoltaic' ? 'À chacun son projet' : 'La pertinence d\'une étude de structure'}
+                </Typography>
+              </Box>
+            </Box>
+
+            <Box 
+              sx={{
+                width: '100%',
+                height: '60px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                position: 'relative',
+                '&::before': {
+                  content: '""',
+                  position: 'absolute',
+                  width: '100px',
+                  height: '1px',
+                  background: 'linear-gradient(90deg, rgba(206, 176, 78, 0), #ceb04e, rgba(206, 176, 78, 0))',
+                },
+              }}
+            />
+
+            <Grid container spacing={4} alignItems="center" sx={{ mb: 6 }}>
+              <Grid item xs={12} md={6}>
+                <Box sx={{
+                  typography: 'body1',
+                  whiteSpace: 'pre-line',
+                  color: '#333',
+                  textAlign: 'justify',
+                  lineHeight: 1.8,
+                }}>
+                  {selectedServiceData.intro}
+                </Box>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Box
+                  component="img"
+                  src={`/images/service/${selectedSection === 'photovoltaic' ? 'etude_photovoltaique.png' : 'etude_de_structure.png'}`}
+                  alt={selectedServiceData.title}
+                  sx={{
+                    width: '100%',
+                    height: 'auto',
+                    borderRadius: 2,
+                    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+                  }}
+                />
+              </Grid>
+            </Grid>
+
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={6}>
+                <Box sx={{ position: 'relative' }}>
+                  <IconButton
+                    onClick={() => handleSectionChange('prev')}
+                    sx={{
+                      position: 'fixed',
+                      left: { xs: 16, md: 32 },
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      color: '#ceb04e',
+                      bgcolor: 'rgba(255, 255, 255, 0.8)',
+                      backdropFilter: 'blur(4px)',
+                      boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+                      zIndex: 10,
+                      '&:hover': {
+                        bgcolor: 'rgba(206, 176, 78, 0.1)',
+                        transform: 'translateY(-50%) scale(1.1)',
+                      },
                     }}
-                  />
-                  
-                  {selectedServiceData.steps.map((step, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
+                    <ArrowBackIcon />
+                  </IconButton>
+
+                  <Paper
+                    elevation={0} 
+                    sx={{
+                      p: { xs: 3, md: 6 },
+                      bgcolor: 'white',
+                      borderRadius: 2,
+                      boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
+                      border: '1px solid rgba(206, 176, 78, 0.2)',
+                      overflow: 'hidden',
+                      position: 'relative',
+                      '&:before': {
+                        content: '""',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        height: '4px',
+                        background: 'linear-gradient(90deg, #ceb04e, #e6c86e)',
+                      },
+                    }}
+                  >
+                    <Typography
+                      variant="h3"
+                      sx={{
+                        mb: 3, 
+                        color: '#ceb04e',
+                        fontFamily: 'Bitter, serif',
+                        fontWeight: 600,
+                        fontSize: { xs: '1.8rem', md: '2.2rem' },
+                        letterSpacing: '0.02em',
+                      }}
                     >
-                      <Box 
-                        sx={{ 
-                          display: 'flex', 
-                          mb: 4,
-                          position: 'relative',
-                          justifyContent: index % 2 === 0 ? 'flex-start' : 'flex-end',
+                      {selectedServiceData.title}
+                    </Typography>
+
+                    <Divider sx={{ mb: 4, borderColor: 'rgba(206, 176, 78, 0.2)' }} />
+
+                    <Typography
+                      variant="body1"
+                      sx={{
+                        mb: 6, 
+                        color: '#333',
+                        fontFamily: 'Montserrat, sans-serif',
+                        fontSize: '1.1rem',
+                        lineHeight: 1.8,
+                        letterSpacing: '0.01em',
+                      }}
+                    >
+                      {selectedServiceData.description}
+                    </Typography>
+
+                    {/* Vertical Timeline */}
+                    <Box sx={{ position: 'relative', mb: 6 }}>
+                      {/* Timeline line */}
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          left: '50%',
+                          top: 0,
+                          bottom: 0,
+                          width: '2px',
+                          background: 'linear-gradient(to bottom, rgba(206, 176, 78, 0.3), rgba(230, 200, 110, 0.3))',
+                          transform: 'translateX(-50%)',
                         }}
-                      >
-                        {/* Timeline dot */}
-                        <Box
-                          sx={{
-                            position: 'absolute',
-                            left: '50%',
-                            transform: 'translateX(-50%)',
-                            zIndex: 1,
-                          }}
+                      />
+                      
+                      {selectedServiceData.steps.map((step, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.5, delay: index * 0.1 }}
                         >
-                          <motion.div
-                            whileHover={{ scale: 1.2 }}
-                            transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                          <Box 
+                            sx={{ 
+                              display: 'flex', 
+                              mb: 4,
+                              position: 'relative',
+                              justifyContent: index % 2 === 0 ? 'flex-start' : 'flex-end',
+                            }}
                           >
+                            {/* Timeline dot */}
                             <Box
                               sx={{
-                                width: 20,
-                                height: 20,
-                                borderRadius: '50%',
-                                bgcolor: '#ceb04e',
-                                border: '4px solid white',
-                                boxShadow: '0 0 0 2px rgba(206, 176, 78, 0.3)',
-                              }}
-                            />
-                          </motion.div>
-                        </Box>
-                        
-                        {/* Content */}
-                        <motion.div
-                          whileHover={{ scale: 1.03 }}
-                          whileTap={{ scale: 0.98 }}
-                          style={{ width: '45%' }}
-                        >
-                          <Paper
-                            elevation={2}
-                            sx={{
-                              p: 3,
-                              cursor: 'pointer',
-                              transition: 'all 0.3s ease',
-                              borderRadius: 2,
-                              border: '1px solid rgba(206, 176, 78, 0.2)',
-                              '&:hover': {
-                                boxShadow: '0 8px 30px rgba(0, 0, 0, 0.1)',
-                                borderColor: '#ceb04e',
-                                transform: 'translateY(-5px)',
-                              },
-                            }}
-                            onClick={() => handleOpenModal(step)}
-                          >
-                            <Typography 
-                              variant="h5" 
-                              sx={{ 
-                                mb: 1, 
-                                color: '#ceb04e',
-                                fontFamily: 'Bitter, serif',
-                                fontWeight: 500,
-                                fontSize: { xs: '1.1rem', md: '1.3rem' },
-                                letterSpacing: '0.01em',
+                                position: 'absolute',
+                                left: '50%',
+                                transform: 'translateX(-50%)',
+                                zIndex: 1,
                               }}
                             >
-                              {step.title}
-                            </Typography>
-                            <Typography 
-                              variant="body2" 
-                              sx={{ 
-                                color: '#555',
-                                fontFamily: 'Montserrat, sans-serif',
-                                fontSize: '0.9rem',
-                                lineHeight: 1.6,
-                                display: '-webkit-box',
-                                WebkitLineClamp: 2,
-                                WebkitBoxOrient: 'vertical',
-                                overflow: 'hidden',
-                              }}
+                              <motion.div
+                                whileHover={{ scale: 1.2 }}
+                                transition={{ type: 'spring', stiffness: 400, damping: 10 }}
+                              >
+                                <Box
+                                  sx={{
+                                    width: 20,
+                                    height: 20,
+                                    borderRadius: '50%',
+                                    bgcolor: '#ceb04e',
+                                    border: '4px solid white',
+                                    boxShadow: '0 0 0 2px rgba(206, 176, 78, 0.3)',
+                                  }}
+                                />
+                              </motion.div>
+                            </Box>
+                            
+                            {/* Content */}
+                            <motion.div
+                              whileHover={{ scale: 1.03 }}
+                              whileTap={{ scale: 0.98 }}
+                              style={{ width: '45%' }}
                             >
-                              {step.description}
-                            </Typography>
-                            <Box sx={{ mt: 2, textAlign: 'right' }}>
-                              <Typography
-                                variant="caption"
+                              <Paper
+                                elevation={2}
                                 sx={{
-                                  color: '#ceb04e',
-                                  fontFamily: 'Montserrat, sans-serif',
-                                  fontWeight: 600,
+                                  p: 3,
                                   cursor: 'pointer',
-                                  display: 'inline-flex',
-                                  alignItems: 'center',
+                                  transition: 'all 0.3s ease',
+                                  borderRadius: 2,
+                                  border: '1px solid rgba(206, 176, 78, 0.2)',
                                   '&:hover': {
-                                    textDecoration: 'underline',
+                                    boxShadow: '0 8px 30px rgba(0, 0, 0, 0.1)',
+                                    borderColor: '#ceb04e',
+                                    transform: 'translateY(-5px)',
                                   },
                                 }}
+                                onClick={() => handleOpenModal(step)}
                               >
-                                Lire la suite
-                                <ArrowForwardIcon sx={{ ml: 0.5, fontSize: '0.8rem' }} />
-                              </Typography>
-                            </Box>
-                          </Paper>
+                                <Typography 
+                                  variant="h5" 
+                                  sx={{ 
+                                    mb: 1, 
+                                    color: '#ceb04e',
+                                    fontFamily: 'Bitter, serif',
+                                    fontWeight: 500,
+                                    fontSize: { xs: '1.1rem', md: '1.3rem' },
+                                    letterSpacing: '0.01em',
+                                  }}
+                                >
+                                  {step.title}
+                                </Typography>
+                                <Typography 
+                                  variant="body2" 
+                                  sx={{ 
+                                    color: '#555',
+                                    fontFamily: 'Montserrat, sans-serif',
+                                    fontSize: '0.9rem',
+                                    lineHeight: 1.6,
+                                    display: '-webkit-box',
+                                    WebkitLineClamp: 2,
+                                    WebkitBoxOrient: 'vertical',
+                                    overflow: 'hidden',
+                                  }}
+                                >
+                                  {step.description}
+                                </Typography>
+                                <Box sx={{ mt: 2, textAlign: 'right' }}>
+                                  <Typography
+                                    variant="caption"
+                                    sx={{
+                                      color: '#ceb04e',
+                                      fontFamily: 'Montserrat, sans-serif',
+                                      fontWeight: 600,
+                                      cursor: 'pointer',
+                                      display: 'inline-flex',
+                                      alignItems: 'center',
+                                      '&:hover': {
+                                        textDecoration: 'underline',
+                                      },
+                                    }}
+                                  >
+                                    Lire la suite
+                                    <ArrowForwardIcon sx={{ ml: 0.5, fontSize: '0.8rem' }} />
+                                  </Typography>
+                                </Box>
+                              </Paper>
+                            </motion.div>
+                          </Box>
                         </motion.div>
-                      </Box>
-                    </motion.div>
-                  ))}
-                </Box>
-              </Paper>
+                      ))}
+                    </Box>
+                  </Paper>
 
-              <IconButton
-                onClick={() => handleSectionChange('next')}
-                sx={{
-                  position: 'fixed',
-                  right: { xs: 16, md: 32 },
-                  top: '50%',
-                  transform: 'translateY(-50%)',
-                  color: '#ceb04e',
-                  bgcolor: 'rgba(255, 255, 255, 0.8)',
-                  backdropFilter: 'blur(4px)',
-                  boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
-                  zIndex: 10,
-                  '&:hover': {
-                    bgcolor: 'rgba(206, 176, 78, 0.1)',
-                    transform: 'translateY(-50%) scale(1.1)',
-                  },
-                }}
-              >
-                <ArrowForwardIcon />
-              </IconButton>
-            </Box>
+                  <IconButton
+                    onClick={() => handleSectionChange('next')}
+                    sx={{
+                      position: 'fixed',
+                      right: { xs: 16, md: 32 },
+                      top: '50%',
+                      transform: 'translateY(-50%)',
+                      color: '#ceb04e',
+                      bgcolor: 'rgba(255, 255, 255, 0.8)',
+                      backdropFilter: 'blur(4px)',
+                      boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
+                      zIndex: 10,
+                      '&:hover': {
+                        bgcolor: 'rgba(206, 176, 78, 0.1)',
+                        transform: 'translateY(-50%) scale(1.1)',
+                      },
+                    }}
+                  >
+                    <ArrowForwardIcon />
+                  </IconButton>
+                </Box>
+              </Grid>
+            </Grid>
           </motion.div>
         </AnimatePresence>
       </Container>
