@@ -16,8 +16,6 @@ import {
 import { motion, AnimatePresence } from 'framer-motion';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import Link from 'next/link';
-import { theme } from '../../theme';
 
 export default function Services() {
   const [selectedSection, setSelectedSection] = useState('photovoltaic');

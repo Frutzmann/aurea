@@ -15,12 +15,14 @@
     "@mui/material": "^7.0.2",
     "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@supabase/supabase-js": "^2.49.4",
+    "axios": "^1.8.4",
     "bootstrap": "^5.3.5",
     "framer-motion": "^12.7.3",
     "next": "15.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "resend": "^4.3.0"
+    "resend": "^4.3.0",
+    "uuid": "^11.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

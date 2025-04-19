@@ -1,27 +1,41 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
-import { AppBar, Toolbar, Button, IconButton, Drawer, List, ListItem, ListItemText, Box } from '@mui/material';
+import { usePathname } from 'next/navigation';
+import { AppBar, Toolbar, Button, IconButton, Drawer, List, ListItem, ListItemText, Box, Typography, useScrollTrigger } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-function Navbar() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const router = useRouter();
-  const isHomePage = router.pathname === '/';
+const menuItems = [
+  { text: 'Accueil', href: '/' },
+  { text: 'Services', href: '/services' },
+  { text: 'À propos', href: '/about' },
+  { text: 'Contact', href: '/contact' },
+];
 
-  const menuItems = [
-    { text: 'Accueil', path: '/' },
-    { text: 'A propos', path: '/about' },
-    { text: 'Mes Prestations', path: '/services' },
-    // { text: 'Blog', path: '/blog' },
-    { text: 'Contact', path: '/contact', isButton: true },
-  ];
+export default function Navbar() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const pathname = usePathname();
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 100,
+  });
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  if (!mounted) {
+    return null;
+  }
+
+  const isHome = pathname === '/';
+  const isScrolled = trigger || !isHome;
 
   return (
     <>
@@ -59,17 +73,17 @@ function Navbar() {
                 position: 'relative',
                 width: { xs: '100px', sm: '120px' },
                 height: { xs: '40px', sm: '48px' },
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
               }}
             >
               <Image
                 src="/images/logo/logo.png"
                 alt="AURÊA Logo"
-                layout="fill"
-                objectFit="contain"
+                sizes="(max-width: 600px) 100px, 120px"
+                fill
                 priority
+                style={{
+                  objectFit: 'contain',
+                }}
               />
             </Box>
             <Box
@@ -97,7 +111,7 @@ function Navbar() {
               <Button
                 key={item.text}
                 component={Link}
-                href={item.path}
+                href={item.href}
                 variant={item.isButton ? "contained" : "text"}
                 sx={item.isButton ? {
                   bgcolor: '#333',
@@ -112,7 +126,7 @@ function Navbar() {
                     bgcolor: '#000',
                   },
                 } : {
-                  color: router.pathname === item.path ? '#ceb04e' : '#333',
+                  color: pathname === item.href ? '#ceb04e' : '#333',
                   textTransform: 'none',
                   fontSize: '0.9rem',
                   fontWeight: 500,
@@ -123,7 +137,7 @@ function Navbar() {
                     bottom: -2,
                     left: '50%',
                     transform: 'translateX(-50%)',
-                    width: router.pathname === item.path ? '100%' : '0%',
+                    width: pathname === item.href ? '100%' : '0%',
                     height: '2px',
                     backgroundColor: '#ceb04e',
                     transition: 'all 0.3s ease',
@@ -159,7 +173,7 @@ function Navbar() {
       </AppBar>
 
       {/* Add a spacer to prevent content from being hidden behind the fixed navbar */}
-      {!isHomePage && <Box sx={{ height: { xs: 56, sm: 64, md: 72 } }} />}
+      {!isHome && <Box sx={{ height: { xs: 56, sm: 64, md: 72 } }} />}
 
       {/* Mobile Menu Drawer */}
       <Drawer
@@ -180,15 +194,14 @@ function Navbar() {
         <List sx={{ pt: 2 }}>
           {menuItems.map((item) => (
             <ListItem
-              button
               key={item.text}
               component={Link}
-              href={item.path}
+              href={item.href}
               onClick={handleDrawerToggle}
               sx={{
                 py: 2,
-                color: router.pathname === item.path ? '#ceb04e' : '#333',
-                bgcolor: router.pathname === item.path ? 'rgba(206, 176, 78, 0.1)' : 'transparent',
+                color: pathname === item.href ? '#ceb04e' : '#333',
+                bgcolor: pathname === item.href ? 'rgba(206, 176, 78, 0.1)' : 'transparent',
                 '&:hover': {
                   bgcolor: 'rgba(0, 0, 0, 0.05)',
                 },
@@ -199,7 +212,7 @@ function Navbar() {
                 sx={{
                   '& .MuiTypography-root': {
                     fontSize: '0.9rem',
-                    fontWeight: router.pathname === item.path ? 600 : 500,
+                    fontWeight: pathname === item.href ? 600 : 500,
                   },
                 }}
               />
@@ -209,6 +222,4 @@ function Navbar() {
       </Drawer>
     </>
   );
-}
-
-export default Navbar; 
+} 

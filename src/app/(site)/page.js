@@ -1,9 +1,10 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Container, Typography, Button, Box, Grid, Paper, Divider } from '@mui/material';
 import { motion } from 'framer-motion';
-import { theme, styles } from '../theme';
 
 function Home() {
   return (
@@ -36,9 +37,12 @@ function Home() {
           <Image
             src="/images/aurea-hero.png"
             alt="AUREA Hero Background"
-            layout="fill"
-            objectFit="cover"
+            fill
             priority
+            sizes="100vw"
+            style={{
+              objectFit: 'cover',
+            }}
           />
         </Box>
         <Box

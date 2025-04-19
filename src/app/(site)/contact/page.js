@@ -16,14 +16,14 @@ import {
   InputAdornment,
 } from '@mui/material';
 import { motion } from 'framer-motion';
-import { theme, styles } from '../../theme';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import BusinessIcon from '@mui/icons-material/Business';
-import PersonIcon from '@mui/icons-material/Person';
+import PersonIcon from '@mui/icons-material/Person'; 
+import { ContactAPI } from '@/lib/api/client';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -47,10 +47,9 @@ export default function Contact() {
     setLoading(true);
 
     try {
-      // Here you can implement your own form submission logic
-      // For now, we'll just simulate a successful submission
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
+      const { data } = await ContactAPI.create(formData);
+      
+      // Clear form
       setFormData({
         firstname: '',
         lastname: '',
@@ -62,7 +61,7 @@ export default function Contact() {
 
       setSnackbar({
         open: true,
-        message: 'Votre message a été envoyé avec succès !',
+        message: data.message,
         severity: 'success'
       });
 
@@ -70,7 +69,7 @@ export default function Contact() {
       console.error('Error:', error);
       setSnackbar({
         open: true,
-        message: 'Une erreur est survenue lors de l\'envoi du message',
+        message: error.message,
         severity: 'error'
       });
     } finally {

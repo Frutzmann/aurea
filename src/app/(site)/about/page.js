@@ -7,15 +7,13 @@ import {
   Box,
   Grid,
   Paper,
-  Divider,
   List,
   ListItem,
   ListItemIcon,
   ListItemText,
 } from '@mui/material';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion,  } from 'framer-motion';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import { theme } from '../../theme';
 
 export default function About() {
   return (
