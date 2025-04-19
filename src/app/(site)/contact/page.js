@@ -344,6 +344,7 @@ export default function Contact() {
           }}
         >
           {/* Form Card */}
+          {/*
           <Box 
             sx={{ 
               flex: { xs: '1', md: '1.5' },
@@ -629,13 +630,16 @@ export default function Contact() {
               </Paper>
             </motion.div>
           </Box>
+          */}
 
           {/* Contact Information Card */}
           <Box 
             sx={{ 
               flex: 1,
               width: '100%',
-              mt: { xs: 4, md: 0 }
+              mt: { xs: 4, md: 0 },
+              display: 'flex',
+              justifyContent: 'center'
             }}
           >
             <motion.div
@@ -651,7 +655,9 @@ export default function Contact() {
                   backgroundColor: 'white',
                   boxShadow: '0 4px 20px rgba(0, 0, 0, 0.05)',
                   border: '1px solid rgba(206, 176, 78, 0.2)',
-                  height: '100%'
+                  height: '100%',
+                  maxWidth: '500px',
+                  width: '100%'
                 }}
               >
                 <Typography 
@@ -819,6 +825,7 @@ export default function Contact() {
             </motion.div>
           </Box>
         </Box>
+        
       </Container>
 
       {/* Maps Section - Now positioned after the contact cards */}

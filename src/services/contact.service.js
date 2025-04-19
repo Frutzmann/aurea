@@ -31,10 +31,10 @@ class ContactService {
       }
 
       // Send confirmation email to user
-      await EmailService.sendContactConfirmation(contact);
+      // await EmailService.sendContactConfirmation(contact);
 
       // Send notification email to admin
-      await EmailService.sendAdminNotification(contact);
+      // await EmailService.sendAdminNotification(contact);
 
       return Contact.fromJSON(data);
     } catch (error) {
