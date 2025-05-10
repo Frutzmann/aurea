@@ -14,14 +14,14 @@ function Home() {
         sx={{
           position: 'relative',
           color: 'white',
-          pt: 0,
-          pb: { xs: 10, md: 16 },
-          mb: { xs: 8, md: 12 },
+          pt: { xs: 7, md: 9 },
+          pb: { xs: 8, md: 14 },
+          mb: { xs: 10, md: 14 },
           overflow: 'hidden',
-          minHeight: { xs: '600px', md: '100vh' },
+          minHeight: { xs: '500px', md: '650px' },
           display: 'flex',
           alignItems: 'center',
-          mt: '-64px', // Offset for navbar height
+          justifyContent: 'center',
         }}
       >
         <Box
@@ -35,7 +35,7 @@ function Home() {
           }}
         >
           <Image
-            src="/images/aurea-hero.png"
+            src="/images/hero/aurea-hero.jpg"
             alt="AUREA Hero Background"
             fill
             priority
@@ -138,7 +138,7 @@ function Home() {
                     },
                   }}
                 >
-                  Découvrir nos services
+                  Découvrir mes services
                 </Button>
               </Box>
             </Box>
@@ -203,7 +203,7 @@ function Home() {
               >
                 {/* First set of images */}
                 {[
-                  { src: '/images/clients/maison.png', alt: 'Maison particulière' },
+                  { src: '/images/clients/maison.png', alt: 'Maisons particulières' },
                   { src: '/images/clients/batiments_industriels.png', alt: 'Bâtiments industriels' },
                   { src: '/images/clients/batiments_communaux.png', alt: 'Bâtiments communaux' },
                   { src: '/images/clients/batiments_agricoles.png', alt: 'Bâtiments agricoles' },
@@ -317,7 +317,7 @@ function Home() {
                 
                 {/* Duplicate set for seamless loop */}
                 {[
-                  { src: '/images/clients/maison.png', alt: 'Maison particulière' },
+                  { src: '/images/clients/maison.png', alt: 'Maisons sparticulières' },
                   { src: '/images/clients/batiments_industriels.png', alt: 'Bâtiments industriels' },
                   { src: '/images/clients/batiments_communaux.png', alt: 'Bâtiments communaux' },
                   { src: '/images/clients/batiments_agricoles.png', alt: 'Bâtiments agricoles' },
@@ -505,7 +505,7 @@ function Home() {
                       letterSpacing: '0.01em',
                     }}
                   >
-                    Peur d'avoir une structure trop fragile pour votre projet ?
+                    Nécessité d'une structure adaptée à votre projet
                   </Typography>
                   <Typography 
                     variant="body1" 
@@ -899,7 +899,7 @@ function Home() {
                 mx: 'auto',
               }}
             >
-              Contactez-nous pour discuter de votre projet et découvrir comment nous pouvons vous accompagner dans votre transition énergétique.
+              Contactez-moi pour discuter de votre projet et découvrir comment je peux vous accompagner dans votre transition énergétique.
             </Typography>
             <Button
               component={Link}
@@ -922,7 +922,7 @@ function Home() {
                 },
               }}
             >
-              Nous contacter (premier rendez-vous gratuit)
+              Me contacter (premier rendez-vous gratuit)
             </Button>
           </motion.div>
         </Box>

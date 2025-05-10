@@ -65,20 +65,23 @@ export default function Navbar() {
               display: 'flex',
               alignItems: 'center',
               textDecoration: 'none',
-              gap: 3,
+              gap: 4,
             }}
           >
             <Box
               sx={{
                 position: 'relative',
-                width: { xs: '100px', sm: '120px' },
-                height: { xs: '40px', sm: '48px' },
+                width: { xs: '120px', sm: '140px' },
+                height: { xs: '48px', sm: '56px' },
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}
             >
               <Image
-                src="/images/logo/logo.png"
+                src="/images/logo/logo_site_internet.png"
                 alt="AURÊA Logo"
-                sizes="(max-width: 600px) 100px, 120px"
+                sizes="(max-width: 700px) 120px, 140px"
                 fill
                 priority
                 style={{
@@ -95,7 +98,7 @@ export default function Navbar() {
                 whiteSpace: 'nowrap',
               }}
             >
-              Calcul de structure et études photovoltaiques
+              Calculs de structures et études photovoltaïques
             </Box>
           </Box>
 

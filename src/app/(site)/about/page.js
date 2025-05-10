@@ -171,28 +171,47 @@ export default function About() {
                 Un projet qui sonne comme un renouveau et qui me donne l'opportunité d'allier mes compétences
                 et mes valeurs au quotidien.
               </Typography>
-              <Typography 
-                sx={{ 
-                  fontFamily: "'Montserrat', sans-serif",
-                  fontSize: '1.1rem',
-                  lineHeight: 1.8,
-                  color: '#555',
-                  fontStyle: 'italic',
-                  position: 'relative',
-                  pl: 3,
-                  '&:before': {
-                    content: '"\\201C"',
-                    position: 'absolute',
-                    left: 0,
-                    top: 0,
-                    color: '#ceb04e',
-                    fontSize: '2rem',
-                    lineHeight: 1
-                  }
-                }}
-              >
-                A mes yeux, une étude n'est pas seulement un numéro de dossier.
-              </Typography>
+              <Box sx={{ maxWidth: 600, mx: 'auto', my: 6, px: { xs: 2, sm: 4 } }}>
+                <Box
+                  sx={{
+                    background: '#fffbea',
+                    border: '1px solid #ceb04e',
+                    borderRadius: 3,
+                    px: { xs: 2, sm: 4 },
+                    py: { xs: 3, sm: 4 },
+                    boxShadow: '0 2px 12px rgba(206, 176, 78, 0.07)',
+                    textAlign: 'center',
+                    position: 'relative',
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontFamily: "'Montserrat', sans-serif",
+                      fontSize: { xs: '1rem', sm: '1.15rem' },
+                      color: '#555',
+                      fontStyle: 'italic',
+                      fontWeight: 400,
+                      lineHeight: 1.7,
+                      display: 'inline',
+                    }}
+                  >
+                    <span style={{
+                      color: '#ceb04e',       
+                      fontFamily: "'Montserrat', sans-serif",
+                      verticalAlign: 'middle',
+                      marginRight: '8px',
+                    }}>&ldquo;</span>     
+                    A mes yeux, une étude n&apos;est pas seulement un numéro de dossier.<br />
+                    Il me parait fondamental d&apos;être à l&apos;écoute de chaque client et de mettre mes connaissances à son service, afin de l&apos;accompagner dans ses démarches et sa réflexion. C&apos;est en m&apos;appuyant sur ces valeurs que j&apos;ai fondé Aurêa.
+                    <span style={{
+                      color: '#ceb04e',                
+                      fontFamily: "'Montserrat', sans-serif",
+                      verticalAlign: 'middle',
+                      marginLeft: '8px',
+                    }}>&rdquo;</span>
+                  </Typography>
+                </Box>
+              </Box>
             </motion.div>
           </Grid>
           <Grid 
@@ -221,7 +240,7 @@ export default function About() {
             >
               <Box
                 component="img"
-                src="/images/about/about.png"
+                src="/images/about/about.jpg"
                 alt="Aurore Millot"
                 sx={{
                   width: '100%',
@@ -506,7 +525,7 @@ export default function About() {
                   mb: 4,
                 }}
               >
-                Contactez-nous pour discuter de votre projet et découvrir comment nous pouvons vous accompagner dans votre transition énergétique.
+                Contactez-moi pour discuter de votre projet et découvrir comment je peux vous accompagner dans votre transition énergétique.
               </Typography>
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -539,7 +558,7 @@ export default function About() {
                     e.currentTarget.style.boxShadow = '0 4px 12px rgba(206, 176, 78, 0.2)';
                   }}
                 >
-                  Nous contacter
+                  Me contacter
                 </a>
               </motion.div>
             </motion.div>

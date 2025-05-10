@@ -157,7 +157,7 @@ pertinence structurelle, facilité de réalisation, emplacement intelligent, et 
               letterSpacing: '0.02em',
             }}
           >
-            Nos Services
+            Mes Services
           </Typography>
           
           <Box sx={{ 

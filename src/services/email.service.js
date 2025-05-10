@@ -11,10 +11,10 @@ class EmailService {
         to: email,
         subject: 'Confirmation de votre message - Aurêa',
         html: `
-          <h2>Merci de nous avoir contacté</h2>
+          <h2>Merci de m'avoir contactée</h2>
           <p>Cher(e) ${firstname} ${lastname},</p>
-          <p>Nous avons bien reçu votre message et nous vous en remercions.</p>
-          <p>Nous vous répondrons dans les plus brefs délais.</p>
+          <p>J'ai bien reçu votre message et vous en remercie.</p>
+          <p>Je vous recontacte dans les plus brefs délais.</p>
           <br/>
           <p>Cordialement,</p>
           <p>Aurore MILLOT<br/>Aurêa</p>

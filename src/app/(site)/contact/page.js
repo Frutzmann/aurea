@@ -18,6 +18,9 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
+  Modal,
+  Backdrop,
+  Fade,
 } from '@mui/material';
 import { motion } from 'framer-motion';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
@@ -66,6 +69,8 @@ export default function Contact() {
     message: '',
     severity: 'success'
   });
+
+  const [imageModal, setImageModal] = useState({ open: false, src: '', alt: '' });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -192,7 +197,7 @@ export default function Contact() {
                 letterSpacing: '0.02em'
               }}
             >
-              Contactez-nous
+              Contactez-moi
             </Typography>
             <Typography 
               sx={{ 
@@ -208,7 +213,7 @@ export default function Contact() {
                 lineHeight: 1.6
               }}
             >
-              Discutons de votre projet et découvrons comment nous pouvons vous accompagner
+              Discutons de votre projet et découvrons comment je peux vous accompagner
             </Typography>
           </motion.div>
         </Container>
@@ -284,7 +289,7 @@ export default function Contact() {
                 zIndex: 2
               }}
             >
-              Aurore MILLOT — Aurea
+              Aurore MILLOT — Aurêa
             </Typography>
           </Box>
         </motion.div>
@@ -843,7 +848,7 @@ export default function Contact() {
               sx={{
                 mb: 6,
                 fontWeight: 700,
-                color: '#ceb04e', // Golden color to match other headers
+                color: '#ceb04e',
                 fontSize: { xs: '2rem', md: '2.5rem' },
                 letterSpacing: '0.02em',
                 position: 'relative',
@@ -860,11 +865,11 @@ export default function Contact() {
                 }
               }}
             >
-              Notre zone d'intervention
+              Ma zone d'intervention
             </Typography>
             
-            <Grid container spacing={4}>
-              <Grid item xs={12} md={6}>
+            <Grid container spacing={4} justifyContent="center">
+              <Grid item xs={12} md={6} display="flex" justifyContent="center">
                 <Box
                   sx={{
                     position: 'relative',
@@ -876,7 +881,9 @@ export default function Contact() {
                       transform: 'translateY(-5px)',
                       boxShadow: '0 12px 40px rgba(0,0,0,0.15)',
                     },
+                    cursor: 'pointer',
                   }}
+                  onClick={() => setImageModal({ open: true, src: '/images/contact/périmètre_d_intervention.png', alt: "Périmètre d'intervention Aurêa" })}
                 >
                   <Box
                     component="img"
@@ -884,8 +891,11 @@ export default function Contact() {
                     alt="Périmètre d'intervention Aurêa"
                     sx={{
                       width: '100%',
+                      maxWidth: 300,
                       height: 'auto',
                       display: 'block',
+                      mx: 'auto',
+                      objectFit: 'contain',
                       transition: 'transform 0.5s ease',
                       '&:hover': {
                         transform: 'scale(1.03)',
@@ -909,8 +919,7 @@ export default function Contact() {
                   </Box>
                 </Box>
               </Grid>
-              
-              <Grid item xs={12} md={6}>
+              <Grid item xs={12} md={6} display="flex" justifyContent="center">
                 <Box
                   sx={{
                     position: 'relative',
@@ -922,7 +931,9 @@ export default function Contact() {
                       transform: 'translateY(-5px)',
                       boxShadow: '0 12px 40px rgba(0,0,0,0.15)',
                     },
+                    cursor: 'pointer',
                   }}
+                  onClick={() => setImageModal({ open: true, src: '/images/contact/carte_St_Germain.jpg', alt: 'Carte de St Germain' })}
                 >
                   <Box
                     component="img"
@@ -930,8 +941,11 @@ export default function Contact() {
                     alt="Carte de St Germain"
                     sx={{
                       width: '100%',
+                      maxWidth: 300,
                       height: 'auto',
                       display: 'block',
+                      mx: 'auto',
+                      objectFit: 'contain',
                       transition: 'transform 0.5s ease',
                       '&:hover': {
                         transform: 'scale(1.03)',
@@ -956,6 +970,49 @@ export default function Contact() {
                 </Box>
               </Grid>
             </Grid>
+            {/* Modal for enlarged image */}
+            <Modal
+              open={imageModal.open}
+              onClose={() => setImageModal({ open: false, src: '', alt: '' })}
+              closeAfterTransition
+              slots={{ backdrop: Backdrop }}
+              slotProps={{ backdrop: { timeout: 500 } }}
+            >
+              <Fade in={imageModal.open}>
+                <Box
+                  sx={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    bgcolor: 'background.paper',
+                    boxShadow: 24,
+                    borderRadius: 2,
+                    outline: 'none',
+                    p: 2,
+                    maxWidth: '90vw',
+                    maxHeight: '90vh',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                  }}
+                >
+                  <Box
+                    component="img"
+                    src={imageModal.src}
+                    alt={imageModal.alt}
+                    sx={{
+                      width: '100%',
+                      height: 'auto',
+                      maxWidth: { xs: 350, sm: 500, md: 700 },
+                      maxHeight: { xs: 300, sm: 400, md: 600 },
+                      borderRadius: 2,
+                      boxShadow: '0 8px 30px rgba(0,0,0,0.18)',
+                    }}
+                  />
+                </Box>
+              </Fade>
+            </Modal>
           </motion.div>
         </Container>
       </Box>
